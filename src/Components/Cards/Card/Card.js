@@ -16,6 +16,7 @@ const Card = (props) => {
         cardHeader: {
             fontWeight: 300,
             marginBottom: '.5rem',
+            fontSize: '1.8rem',
         },
         counter: {
             fontWeight: 400,

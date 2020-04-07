@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchData } from '../../API/API';
 import { Grid, makeStyles } from '@material-ui/core';
 import Card from './Card/Card';
 
@@ -14,12 +15,17 @@ const Cards = (props) => {
 
     const classes = useStyles();
 
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        fetchData().then(response => setData(response));
+    }, []);
+
     return (
         <Grid container className={classes.root} >
-            <Card type="infected" response={props.response} />
-            <Card type="recovered" response={props.response} />
-            <Card type="deaths" response={props.response} />
-
+            <Card type="infected" response={data} />
+            <Card type="recovered" response={data} />
+            <Card type="deaths" response={data} />
         </Grid>
     );
 }
