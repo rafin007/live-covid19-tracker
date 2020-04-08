@@ -4,18 +4,20 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { fetchDailyData } from '../../API/API';
 import { Line, Bar } from 'react-chartjs-2';
-import CountryPicker from '../CountryPicker/CountryPicker';
 
+const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
 
-const useStyles = makeStyles({
-    chartContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-    }
-});
-
-const Chart = () => {
+    const useStyles = makeStyles({
+        chartContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginBottom: '2rem'
+        },
+        chart: {
+            height: country ? '' : '35rem'
+        }
+    });
 
     const classes = useStyles();
 
@@ -44,16 +46,48 @@ const Chart = () => {
                 fill: true
             }],
 
+        }} options={{
+            responsive: true,
+            title: { text: 'Covid-19 chart', display: true },
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [
+                    {
+                        gridLines: {
+                            display: false
+                        }
+                    }
+                ]
+            }
+        }} />
+    );
+
+    const barChart = (
+        confirmed &&
+        <Bar data={{
+            labels: ['Infected', 'Recovered', 'Deaths'],
+            datasets: [{
+                label: 'People',
+                backgroundColor: [
+                    'rgba(0, 0, 255, 0.5)',
+                    'rgba(0, 255, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)',
+                ],
+                data: [confirmed.value, recovered.value, deaths.value]
+            }]
+        }} options={{
+            legend: { display: false },
+            title: {
+                display: true,
+                text: `Current state in ${country}`
+            }
         }} />
     );
 
     return (
         <Grid container className={classes.chartContainer} >
-            <Grid item xs={10} >
-                <CountryPicker />
-            </Grid>
-            <Grid item xs={12} md={10} >
-                {lineChart}
+            <Grid item xs={12} md={10} className={classes.chart} >
+                {country ? barChart : lineChart}
             </Grid>
         </Grid>
     );

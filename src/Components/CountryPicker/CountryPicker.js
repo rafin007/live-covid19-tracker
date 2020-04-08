@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     }
 });
 
-const CountryPicker = () => {
+const CountryPicker = (props) => {
 
     const [countries, setCountries] = useState([]);
 
@@ -40,8 +40,10 @@ const CountryPicker = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 className={classes.select}
+                defaultValue=""
+                onChange={(event) => props.handleChange(event.target.value)}
             >
-                <MenuItem value="global" >Global</MenuItem>
+                <MenuItem value="" >Global</MenuItem>
                 {countries.map(country => <MenuItem value={country} key={country} >{country}</MenuItem>)}
             </Select>
         </FormControl>

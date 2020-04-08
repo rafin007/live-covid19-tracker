@@ -82,7 +82,7 @@ const Card = (props) => {
                     {new Date(props.response.lastUpdate).toDateString()}
                 </h3>
                 <h4 className={classes.description} >
-                    {description}
+                    {props.country ? `${description} in ${props.country}` : `${description} globally`}
                 </h4>
             </CardContent>
         </Grid>
