@@ -35,7 +35,6 @@ const App = () => {
   const [country, setCountry] = useState('');
 
   const handleCountryChanged = async (country) => {
-    console.log(country);
 
     const fetchedData = await fetchData(country);
 
