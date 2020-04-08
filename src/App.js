@@ -10,7 +10,8 @@ const useStyles = makeStyles({
   creditText: {
     textAlign: 'center',
     color: 'var(--color-secondary)',
-    margin: '0 auto'
+    margin: '0 auto',
+    marginBottom: '1rem'
   },
   countryPicker: {
     margin: '0 auto'
