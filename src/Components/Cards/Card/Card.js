@@ -48,38 +48,38 @@ const Card = (props) => {
     let description = '';
     let number = 0;
 
-    if (!props.response.confirmed) {
+    if (!props.response.cases) {
         return 'loading...';
     }
 
     if (props.type === 'infected') {
         classList.push(classes.cardInfected);
         description = 'Number of active cases of COVID-19';
-        number = <Counter start={0} end={props.response.confirmed.value} duration={3} separator="," />
+        number = <Counter start={0} end={props.response.cases} duration={3} separator="," />
     }
     else if (props.type === 'recovered') {
         classList.push(classes.cardRecovered);
         description = 'Number of recoveries from COVID-19';
-        number = <Counter start={0} end={props.response.recovered.value} duration={3} separator="," />
+        number = <Counter start={0} end={props.response.recovered ? props.response.recovered : 0} duration={3} separator="," />
 
     }
     else {
         classList.push(classes.cardDeaths);
         description = 'Number of deaths caused by COVID-19';
-        number = <Counter start={0} end={props.response.deaths.value} duration={3} separator="," />
+        number = <Counter start={0} end={props.response.deaths} duration={3} separator="," />
     }
 
     return (
         <Grid item xs={12} md={3} >
             <CardContent className={classList.join(' ')} >
                 <h1 className={classes.cardHeader} >
-                    Total {props.type}
+                    {props.tabValue === 0 ? 'Today' : 'Total'} {props.type}
                 </h1>
                 <h2 className={classes.counter} >
                     {number}
                 </h2>
                 <h3 className={classes.date} >
-                    {new Date(props.response.lastUpdate).toDateString()}
+                    {new Date(props.response.updated).toDateString()}
                 </h3>
                 <h4 className={classes.description} >
                     {props.country ? `${description} in ${props.country}` : `${description} globally`}

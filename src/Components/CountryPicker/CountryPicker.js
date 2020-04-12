@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     dropDown: {
         width: '100%',
         margin: '0 auto',
-        marginBottom: '2rem',
+        marginBottom: '1rem',
     },
     label: {
         color: 'var(--color-primary-foreground)',

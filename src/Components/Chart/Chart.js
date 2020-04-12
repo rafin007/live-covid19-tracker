@@ -5,7 +5,13 @@ import { useEffect } from 'react';
 import { fetchDailyData } from '../../API/API';
 import { Line, Bar } from 'react-chartjs-2';
 
-const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
+const Chart = ({ data: { cases, recovered, deaths }, country }) => {
+
+    //cases
+    //deaths
+    //recovered
+    //updated
+    //country
 
     const useStyles = makeStyles({
         chartContainer: {
@@ -63,7 +69,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
     );
 
     const barChart = (
-        confirmed &&
+        cases &&
         <Bar data={{
             labels: ['Infected', 'Recovered', 'Deaths'],
             datasets: [{
@@ -73,7 +79,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
                     'rgba(0, 255, 0, 0.5)',
                     'rgba(255, 0, 0, 0.5)',
                 ],
-                data: [confirmed.value, recovered.value, deaths.value]
+                data: [cases, recovered, deaths]
             }]
         }} options={{
             legend: { display: false },

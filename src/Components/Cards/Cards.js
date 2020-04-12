@@ -17,9 +17,9 @@ const Cards = (props) => {
 
     return (
         <Grid container className={classes.root} >
-            <Card type="infected" response={props.data} country={props.country} />
-            <Card type="recovered" response={props.data} country={props.country} />
-            <Card type="deaths" response={props.data} country={props.country} />
+            <Card type="infected" response={props.data} country={props.country} tabValue={props.tabValue} />
+            <Card type="recovered" response={props.data} country={props.country} tabValue={props.tabValue} />
+            <Card type="deaths" response={props.data} country={props.country} tabValue={props.tabValue} />
         </Grid>
     );
 }

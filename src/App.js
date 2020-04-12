@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Cards from './Components/Cards/Cards';
 import { makeStyles, Grid } from '@material-ui/core';
-import { fetchData } from './API/API';
+import { NovelCovid } from 'novelcovid';
+
+import Cards from './Components/Cards/Cards';
 import Chart from './Components/Chart/Chart';
 import CountryPicker from './Components/CountryPicker/CountryPicker';
+import CustomTabs from './Components/CustomTabs/CustomTabs';
+
+import { fetchData } from './API/API';
 
 const useStyles = makeStyles({
 
@@ -33,6 +37,7 @@ const App = () => {
 
   const [data, setData] = useState({});
 
+  //country
   const [country, setCountry] = useState('');
 
   const handleCountryChanged = async (country) => {
@@ -43,9 +48,57 @@ const App = () => {
     setData(fetchedData);
   }
 
+  //tabs
+  const [tabValue, setTabValue] = useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
+  const track = new NovelCovid();
+
   useEffect(() => {
-    fetchData().then(response => setData(response));
-  }, []);
+    if (country) {
+      track.countries(country).then(response => {
+        setData(response);
+      });
+    }
+    else {
+      track.all().then(response => {
+        setData(response);
+      });
+    }
+  }, [country]);
+
+  const [modifiedData, setModifiedData] = useState({});
+
+  useEffect(() => {
+    setModifiedData({
+      cases: data.todayCases,
+      deaths: data.todayDeaths,
+      updated: data.updated,
+      recovered: null
+    });
+  }, [data]);
+
+  useEffect(() => {
+    if (tabValue > 0) {
+      setModifiedData({
+        cases: data.cases,
+        deaths: data.deaths,
+        updated: data.updated,
+        recovered: data.recovered
+      });
+    }
+    else {
+      setModifiedData({
+        cases: data.todayCases,
+        deaths: data.todayDeaths,
+        updated: data.updated,
+        recovered: null
+      });
+    }
+  }, [tabValue, data]);
 
   return (
     <Grid container >
@@ -55,8 +108,9 @@ const App = () => {
       <Grid item xs={8} className={classes.countryPicker} >
         <CountryPicker handleChange={handleCountryChanged} />
       </Grid>
-      <Cards data={data} country={country} />
-      <Chart handleChange={handleCountryChanged} country={country} data={data} />
+      <CustomTabs handleTabChange={handleTabChange} tabValue={tabValue} />
+      <Cards data={modifiedData} country={country} tabValue={tabValue} />
+      <Chart handleChange={handleCountryChanged} country={country} data={modifiedData} />
       <p className={classes.creditText} >Created by Arefin Mehedi</p>
     </Grid>
   );

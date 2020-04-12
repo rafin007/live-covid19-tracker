@@ -48,3 +48,15 @@ export const fetchCountries = async () => {
         console.log(error);
     }
 }
+
+//https://api.covid19api.com/country/bangladesh/status/confirmed
+//---------------------newAPI
+// export const fetchLiveSummary = async () => {
+//     try {
+//         const { data } = await axios.get(`${newAPI}/summary`);
+
+//         return data;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
