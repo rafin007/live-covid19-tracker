@@ -94,6 +94,7 @@ const Chart = ({ data: { cases, recovered, deaths }, country }) => {
         <Grid container className={classes.chartContainer} >
             <Grid item xs={12} md={10} className={classes.chart} >
                 {country ? barChart : lineChart}
+                {barChart === 0 && `No daily data found for ${country} yet, please check back later`}
             </Grid>
         </Grid>
     );
