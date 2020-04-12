@@ -55,18 +55,18 @@ const Card = (props) => {
     if (props.type === 'infected') {
         classList.push(classes.cardInfected);
         description = 'Number of active cases of COVID-19';
-        number = <Counter start={0} end={props.response.cases ? props.response.cases : 0} duration={3} separator="," />
+        number = <Counter start={0} end={props.response.cases ? props.response.cases : 0} duration={2} separator="," />
     }
     else if (props.type === 'recovered') {
         classList.push(classes.cardRecovered);
         description = 'Number of recoveries from COVID-19';
-        number = <Counter start={0} end={props.response.recovered ? props.response.recovered : 0} duration={3} separator="," />
+        number = <Counter start={0} end={props.response.recovered ? props.response.recovered : 0} duration={2} separator="," />
 
     }
     else {
         classList.push(classes.cardDeaths);
         description = 'Number of deaths caused by COVID-19';
-        number = <Counter start={0} end={props.response.deaths ? props.response.deaths : 0} duration={3} separator="," />
+        number = <Counter start={0} end={props.response.deaths ? props.response.deaths : 0} duration={2} separator="," />
     }
 
     return (

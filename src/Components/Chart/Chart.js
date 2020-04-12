@@ -7,12 +7,6 @@ import { Line, Bar } from 'react-chartjs-2';
 
 const Chart = ({ data: { cases, recovered, deaths }, country }) => {
 
-    //cases
-    //deaths
-    //recovered
-    //updated
-    //country
-
     const useStyles = makeStyles({
         chartContainer: {
             display: 'flex',
