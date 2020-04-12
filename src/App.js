@@ -73,29 +73,21 @@ const App = () => {
   const [modifiedData, setModifiedData] = useState({});
 
   useEffect(() => {
-    setModifiedData({
-      cases: data.todayCases,
-      deaths: data.todayDeaths,
-      updated: data.updated,
-      recovered: null
-    });
-  }, [data]);
+    if (tabValue === 0) {
+      setModifiedData({
+        cases: data.todayCases,
+        deaths: data.todayDeaths,
+        updated: data.updated,
+        recovered: 0
+      });
 
-  useEffect(() => {
-    if (tabValue > 0) {
+    }
+    else {
       setModifiedData({
         cases: data.cases,
         deaths: data.deaths,
         updated: data.updated,
         recovered: data.recovered
-      });
-    }
-    else {
-      setModifiedData({
-        cases: data.todayCases,
-        deaths: data.todayDeaths,
-        updated: data.updated,
-        recovered: null
       });
     }
   }, [tabValue, data]);
