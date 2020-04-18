@@ -7,8 +7,6 @@ import Chart from './Components/Chart/Chart';
 import CountryPicker from './Components/CountryPicker/CountryPicker';
 import CustomTabs from './Components/CustomTabs/CustomTabs';
 
-import { fetchData } from './API/API';
-
 const useStyles = makeStyles({
 
   creditText: {
@@ -41,11 +39,7 @@ const App = () => {
   const [country, setCountry] = useState('');
 
   const handleCountryChanged = async (country) => {
-
-    const fetchedData = await fetchData(country);
-
     setCountry(country);
-    setData(fetchedData);
   }
 
   //tabs
